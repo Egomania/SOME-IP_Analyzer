@@ -13,6 +13,10 @@ Execute 'java -Djava.library.path=resources/natives -jar target/SomeIPAnalyzer-1
 
 # Documentation
 
+## External Documentation
+
+See [http://some-ip-analyzer.readthedocs.org/en/latest/index.html](ReadTheDocs)
+
 ## Parameters
 
 Use -r to define Rules File. A sample is given in resources/rules/rules.config.
