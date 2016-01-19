@@ -20,30 +20,53 @@ import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
 
+/**
+*
+*/
+
 public class EsperClient extends Thread{
 
+	/** Name of the Esper Engine. */
 	public static String EsperEngine;
 	
+	/** Non-Optional: Used Configuration file with needed specifications. */
 	public static String CONFIGURATION_FILE = "";
+	/** Non-Optional: Rules file containing EPL Rules and other definitions. */
 	public static String RULES_FILE = "";
+	/** Optional: Interface to listen on and capture pakets from this source.*/
 	public static String INTERFACE = "";
+	/** Optional: .pcap File containing pakets to be analyzed.*/
 	public static String FILE = "";
+	/** Optional: Folder containing .pcap Files containing pakets to be analyzed.*/
 	public static String DIR = "";
 	
+	/** Verbose-Mode can be set to true using the configuration file and more status information is printed out.*/
 	public static Boolean verbose;
+	/** Whether or not monitoring of the process itself is activated, mainly memory consumption.*/
 	public static Boolean monitoring;
+	/** File were the measured data of the motniroing thread is stored afterwards.*/
 	public static String MONITORING_FILE = "";
 
+	/** Esper Runtime Instance.*/
 	public static EPRuntime cepRT;
+	/** Esper Configuration Instance.*/
 	public static Configuration config;
+	/** Esper Service Provider Instance.*/
 	public static EPServiceProvider epService;
+	/** Esper Administrator Instance.*/
 	public static EPAdministrator cepAdm;
 
+	/** A List of all active Listeners, this includes predefined listeners as well as dynamically added listeners.*/
 	public static ArrayList<MyListener> ListenerList;
+	/** Specific predefined Listener to look after changes in the IP-ID relationship. */
 	public static MyListener helperListenerIP;
+	/** Specific predefined Listener to look after changes in the ID-IP relationship. */
 	public static MyListener helperListenerID;
-	public static MyListener helperListener;
 
+	/**
+	* Constructor for the Analyzer itself.
+	* Takes all commandline arguments for parsing and initialized all needed fields aboth.
+	*/
 	public EsperClient(String[] args){
 
 		System.out.println("Start Engine Setup.");
@@ -68,20 +91,25 @@ public class EsperClient extends Thread{
 
 	}
 
+	/**
+	* Starts the Esper Engine itself.
+	*/
 	public void run(){
 		cepRT = epService.getEPRuntime();
 		System.out.println("Successfully started Esper Runtime.");
 	}
 
+	/**
+	* Appends all predefined listeners to the list of listeners.
+	* Appends for every rules used in the rules file a separate listener to the listeners list.
+	*/
 	private static void setListener(){
 
 		ListenerList = new ArrayList<MyListener>();
 
 		helperListenerIP = new MyListener("HelperListenerIP");
 		helperListenerID = new MyListener("HelperListenerID");
-		helperListener = new MyListener("HelperListener");
 		
-		ListenerList.add(helperListener);
 		ListenerList.add(helperListenerIP);
 		ListenerList.add(helperListenerID);
 
@@ -99,13 +127,13 @@ public class EsperClient extends Thread{
 
 	}
 
+	/**
+	* Configures the Esper Engine.
+	*/
 	private static void setConfig(){
 
 		config.getEngineDefaults().getThreading().setListenerDispatchPreserveOrder(false);
 		config.getEngineDefaults().getThreading().setInternalTimerEnabled(false);
-
-		//config.getEngineDefaults().getThreading().setThreadPoolInbound(true);
-		//config.getEngineDefaults().getThreading().setThreadPoolInboundNumThreads(6);
 		
 		config.getEngineDefaults().getThreading().setThreadPoolOutbound(true);
 		config.getEngineDefaults().getThreading().setThreadPoolOutboundNumThreads(2);
@@ -120,6 +148,9 @@ public class EsperClient extends Thread{
 		
 	}
 
+	/**
+	* Argument Parser.
+	*/
 	private static void paramsParse(String[] args){
 		int i = 0;
 		int mode = 0;
@@ -196,6 +227,9 @@ public class EsperClient extends Thread{
 
 	}
 
+	/**
+	* Set parameters from Config File.
+	*/
 	private static void setParams()
 	{
 		verbose = Boolean.valueOf(helper.readConfiguration(CONFIGURATION_FILE, "verbose"));

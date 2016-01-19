@@ -9,15 +9,24 @@ import org.hyperic.sigar.ProcCpu;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
+/**
+* Parsed packets are passed to a seperate sender running in a single thread.
+*/
 
 public class EventSender extends Thread{
 
+	/**
+	* Standard Constructor.
+	*/
 	public EventSender(){
-
 
 	}
 
-
+	/**
+	* Regarding the source of input, the interface is opened, a file is read or a whole directory is used.
+	* The appropriate Parsing Option is choosen.
+	* Claculation Times are printed afterwards.
+	*/
 	public void run()
 	{
 

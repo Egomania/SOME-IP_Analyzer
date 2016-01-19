@@ -32,13 +32,7 @@ SomeIPParser
 
 .. java:type:: public class SomeIPParser
 
-Fields
-------
-debug
-^^^^^
-
-.. java:field:: static final boolean debug
-   :outertype: SomeIPParser
+   SomeIP Parser Class.
 
 Methods
 -------
@@ -48,9 +42,19 @@ inputFromFile
 .. java:method:: public static void inputFromFile(String filename, EPRuntime cepRT)
    :outertype: SomeIPParser
 
+   Read a single File and send every Paket to the Esper Engine.
+
+   :param filename: .pcap file to read
+   :param cepRT: Esper Engine the parsed paket is sent to
+
 inputFromInterface
 ^^^^^^^^^^^^^^^^^^
 
 .. java:method:: public static void inputFromInterface(String interfaceI, EPRuntime cepRT)
    :outertype: SomeIPParser
+
+   Cpature from interface and send every Paket to the Esper Engine.
+
+   :param interfaceI: interface to capture from
+   :param cepRT: Esper Engine the parsed paket is sent to
 

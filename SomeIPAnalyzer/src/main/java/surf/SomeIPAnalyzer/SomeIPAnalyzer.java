@@ -27,10 +27,6 @@ import com.espertech.esper.client.UpdateListener;
 
 public class SomeIPAnalyzer {
 		
-	/** Specific predefined Listener to look after changes in the IP-ID relationship. */
-	private static MyListener helperListenerIP;
-	/** Specific predefined Listener to look after changes in the ID-IP relationship. */
-	private static MyListener helperListenerID;
 	/** Instance of the Esper Engine that is evaluating the rules.*/
 	public static EsperClient Analyzer;
 

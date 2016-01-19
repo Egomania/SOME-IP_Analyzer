@@ -7,14 +7,21 @@ import org.javatuples.*;
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
 
+/**
+* Listeners Base Class
+*/
+
 	public class MyListener implements UpdateListener
 	{
 
+		/** Message to print in case of a triggering event. */
 		public String message;
+		/** Number of events triggered. */
 		public int counter;
-		
-		private volatile boolean execute;
 
+		/**
+		* Standard Constructor.
+		*/
 		public MyListener(String message)
 		{
 			this.message = message;
@@ -22,10 +29,17 @@ import com.espertech.esper.client.UpdateListener;
 
 		}
 		
+		/**
+		* Dummy Class that should be overwritten by specific Listeners to implement the callback actions.
+		*/
 		public void update(EventBean[] newData, EventBean[] oldData) {
 						
 		}
 
+		/**
+		* Update statistics of the listener.
+		* So far, Counter of Events triggered the listener.
+		*/
 		public void updateStats(){
 			this.counter = this.counter + 1;
 		}

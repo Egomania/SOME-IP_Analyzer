@@ -10,6 +10,8 @@ MalformedListener
 
 .. java:type:: public class MalformedListener extends MyListener
 
+   Specific Listener that gets a single SomeIP-Paket per call. Prints the Paket in verbose mode.
+
 Constructors
 ------------
 MalformedListener
@@ -18,6 +20,8 @@ MalformedListener
 .. java:constructor:: public MalformedListener(String message, Boolean verbose)
    :outertype: MalformedListener
 
+   Uses MyListener as super Class. Sets the print message and verbose mode from configuration File.
+
 Methods
 -------
 update
@@ -25,4 +29,6 @@ update
 
 .. java:method:: public void update(EventBean[] newData, EventBean[] oldData)
    :outertype: MalformedListener
+
+   Callback in case of a triggering event. Statistics are updated and Error message is printed (verbose mode).
 

@@ -29,10 +29,15 @@ import com.espertech.esper.client.EPAdministrator;
 import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.UpdateListener;
 
-
+/**
+* Helper Class for different stuff.
+*/
 
 public class helper {
 
+	/**
+	* Converter from long to bigDecimal
+	*/
 	private static BigDecimal convert (long value, long factor, int comma)
 	{
 		BigDecimal retVal = new BigDecimal(value);
@@ -40,6 +45,11 @@ public class helper {
 		return retVal;
 	}
 
+	/**
+	* The monitoring measurements done by the monitoring thread are written to the output file specified in the configuration file
+	* @param monitor Monitoring Class holding the measurement lists
+	* @param filename configured filename for storing the data
+	*/
 	public static void writeToFile(Monitor monitor, String filename)
 	{
 		long timestamp = System.currentTimeMillis();
@@ -92,6 +102,13 @@ public class helper {
 
 	}
 	
+	/**
+	* Read a single entry in the configuration
+	*
+	* @param fileName Configuration File
+	* @param property entry (property) to read
+	* @return value of the read property
+	*/
 	public static String readConfiguration(String fileName, String property)
 	{
 		Properties prop = new Properties();
@@ -123,6 +140,14 @@ public class helper {
 
 	}
 
+	/**
+	* Read the rules from the rules file and load rules that are defined as 'used'
+	*
+	* @param cepAdm Espers EP Administrator
+	* @param ListenerList List of all listeners, new listeners are appended to
+	* @param filename rules file containing rules and other definitions
+	* @param verbose print additional output or not
+	*/
 	public static void setRules(EPAdministrator cepAdm, ArrayList<MyListener> ListenerList, String filename, Boolean verbose) throws FileNotFoundException, IOException
 	{
 	try 
@@ -206,12 +231,18 @@ public class helper {
 
 	}
 
+	/**
+	* Converter MAC to Long
+	*/
 	private static long Mac2Int(String mac){
 		String macString = mac.replace(":","");
 		Long macLong = Long.parseLong(macString, 16); 	
 		return macLong;
 	}
 
+	/**
+	* Converter IP to integer
+	*/
 	private static int IP2Int(String ip){
 		
 		String ipString = "";
@@ -229,6 +260,12 @@ public class helper {
 		return ipInt;
 	}
 
+	/**
+	* Read the metadata given in the metadata file defined in the configuration file
+	*
+	* @param config Espers Configuration
+	* @param filename metadata file containing additional environment information
+	*/
 	public static void setMetaInfo(Configuration config, String filename)
 	{
 		ArrayList<Long> serverMacs = new ArrayList<Long> ();
@@ -291,6 +328,11 @@ public class helper {
 
 	}
 
+	/**
+	* Set predefined variables to the esper engine.
+	*
+	* @param config Espers Configuration
+	*/
 	public static void setConfig(Configuration config)
 	{
 		//METAINFO
@@ -319,7 +361,12 @@ public class helper {
 	}
 	
 	
-
+	/**
+	* List all files in a given directory
+	*
+	* @param dir Directory to list
+	* @return List of files contained in dir
+	*/
 	public static ArrayList<String> getFiles(String dir) {
 		File f = new File(dir);
 		File[] fileArray = f.listFiles();

@@ -17,10 +17,18 @@ import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-public class SomeIPParser {
+/**
+* SomeIP Parser Class.
+*/
 
-	final static boolean debug = false;
+public class SomeIPParser {
 	
+	/**
+	* Read a single File and send every Paket to the Esper Engine.
+	* 
+	* @param filename .pcap file to read
+	* @param cepRT Esper Engine the parsed paket is sent to
+	*/
 	public static void inputFromFile(String filename, EPRuntime cepRT) {
 		
 		final StringBuilder errbuf = new StringBuilder();
@@ -66,6 +74,12 @@ public class SomeIPParser {
 		
 	}
 
+	/**
+	* Cpature from interface and send every Paket to the Esper Engine.
+	* 
+	* @param interfaceI interface to capture from
+	* @param cepRT Esper Engine the parsed paket is sent to
+	*/
 	public static void inputFromInterface(String interfaceI, EPRuntime cepRT) {
 		
 		int snaplen = 64 * 1024;
