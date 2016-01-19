@@ -15,7 +15,7 @@ Execute 'java -Djava.library.path=resources/natives -jar target/SomeIPAnalyzer-1
 
 ## External Documentation
 
-See [http://some-ip-analyzer.readthedocs.org/en/latest/index.html](ReadTheDocs)
+See [ReadTheDocs](http://some-ip-analyzer.readthedocs.org/en/latest/index.html)
 
 ## Parameters
 
