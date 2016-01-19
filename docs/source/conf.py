@@ -41,6 +41,11 @@ extensions = [
     'motechjavasphinx',
 ]
 
+#intersphinx mapping
+intersphinx_mapping = {
+    'motechmodules' : ('http://modules.some-ip-analyzer.org/en/latest/', None)
+}
+
 #primary domain
 primary_domain='java'
 
