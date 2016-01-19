@@ -9,6 +9,9 @@ import org.hyperic.sigar.ProcCpu;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
+/**
+* Monitoring Class
+*/
 
 public class Monitor extends Thread
 	{

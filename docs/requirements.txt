@@ -1,3 +1,10 @@
+Jinja2
+MarkupSafe
+Pygments
+Sphinx
+lxml
+beautifulsoup4
+wsgiref
 docutils
 javalang
 javasphinx

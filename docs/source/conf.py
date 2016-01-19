@@ -38,6 +38,9 @@ extensions = [
     'javasphinx',
 ]
 
+#primary domain
+primary_domain='java'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
