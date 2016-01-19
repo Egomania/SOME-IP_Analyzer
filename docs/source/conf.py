@@ -38,13 +38,7 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
     'javasphinx',
-    'motechjavasphinx',
 ]
-
-#intersphinx mapping
-intersphinx_mapping = {
-    'motechmodules' : ('http://modules.some-ip-analyzer.org/en/latest/', None)
-}
 
 #primary domain
 primary_domain='java'

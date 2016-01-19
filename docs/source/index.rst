@@ -11,12 +11,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   packages
+   javadoc/packages
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
