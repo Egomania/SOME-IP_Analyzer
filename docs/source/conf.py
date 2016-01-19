@@ -38,6 +38,7 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
     'javasphinx',
+    'motechjavasphinx',
 ]
 
 #primary domain

@@ -1,3 +1,4 @@
+motechjavasphinx
 Jinja2
 MarkupSafe
 Pygments
