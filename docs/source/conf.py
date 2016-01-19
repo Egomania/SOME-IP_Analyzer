@@ -22,6 +22,8 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
+sys.path.insert(0, os.path.abspath('../SomeIPAnalyzer'))
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -46,8 +48,8 @@ templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-source_suffix = ['.rst', '.md']
-#source_suffix =  '.rst'
+#source_suffix = ['.rst', '.md']
+source_suffix =  '.rst'
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
