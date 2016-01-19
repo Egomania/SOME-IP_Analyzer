@@ -20,14 +20,27 @@ import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
 
+/**
+* Main Class of the project.
+* 
+*/
+
 public class SomeIPAnalyzer {
 		
+	/** Specific predefined Listener to look after changes in the IP-ID relationship. */
 	private static MyListener helperListenerIP;
+	/** Specific predefined Listener to look after changes in the ID-IP relationship. */
 	private static MyListener helperListenerID;
-	private static MyListener helperListener;
-
+	/** Instance of the Esper Engine that is evaluating the rules.*/
 	public static EsperClient Analyzer;
 
+	/**
+	* Extracts the Source IP of a given SOME-IP Packet and returns this value as the new IP.
+	* The statictics of the corresponding Listener is updated, in this case helperListenerID.
+	*
+	* @param s The incomming SomeIP-Paket from the stream.
+	* @return The source IP of the incomming SOME-IP Paket
+	*/
 	public static int setClientIP(SomeIPPacket s){
 		
 		Analyzer.helperListenerID.updateStats();
@@ -39,6 +52,13 @@ public class SomeIPAnalyzer {
 
 	}
 
+	/**
+	* Extracts the Client ID of a given SOME-IP Packet and returns this value as the new ID.
+	* The statictics of the corresponding Listener is updated, in this case helperListenerIP.
+	*
+	* @param s The incomming SomeIP-Paket from the stream.
+	* @return The client ID of the incomming SOME-IP Paket
+	*/
 	public static int setClientID(SomeIPPacket s){
 		
 		Analyzer.helperListenerIP.updateStats();
@@ -50,7 +70,12 @@ public class SomeIPAnalyzer {
 
 	}
 
-
+	/**
+	* Main method of the project.
+	* First, commandline arguments are checked and a new Analyzer is initialized.
+	* Monitor is started as seperate thread, if configured.
+	* Esper Engine is started as seperate thread.
+	*/
 	public static void main(String[] args) {
 		
 
@@ -100,7 +125,6 @@ public class SomeIPAnalyzer {
 		{
 			monitor.stopExec();
 			System.out.println("Memory Avergage: virt=" + monitor.memVirtAverage() + " res=" + monitor.memResAverage() + " share=" + monitor.memShareAverage());
-			System.out.println("CPU Average: total=" + monitor.cpuTotalAverage());
 			helper.writeToFile(monitor, Analyzer.MONITORING_FILE);
 		}
 		

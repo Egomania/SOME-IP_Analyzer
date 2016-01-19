@@ -10,7 +10,10 @@ import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
 /**
-* Monitoring Class
+* Monitoring Class for monitoring the Engine during runtime.
+* Usage can be configured using configuration file.
+* Uses a single thread.
+*
 */
 
 public class Monitor extends Thread
@@ -18,13 +21,22 @@ public class Monitor extends Thread
 
 		private volatile boolean execute;
 
+		/** List for measurements of virtual memory usage. */
 		public ArrayList<Pair<java.sql.Timestamp, Long>> memVirtList;
+		/** List for measurements of shared memory usage. */
 		public ArrayList<Pair<java.sql.Timestamp, Long>> memShareList;
+		/** List for measurements of resident memory usage. */
 		public ArrayList<Pair<java.sql.Timestamp, Long>> memResList;
+		/** List for measurements of used CPU Time. */
 		public ArrayList<Pair<java.sql.Timestamp, Long>> cpuTotalList;
+		/** Private Sigar Instance used for measurements.*/
 		private Sigar sigar;
+		/** Current PID of the process. */
 		public long pid;
 
+		/**
+		* Constructor to initialize all needed variables.
+		*/
 		public Monitor()
 		{
 			this.memVirtList = new ArrayList<Pair<java.sql.Timestamp, Long>>();
@@ -37,10 +49,17 @@ public class Monitor extends Thread
 			System.out.println("Monitor Started with: " + pid);
 		}
 
+		/**
+		* Method to stop the Monitoring task externally.
+		* Used from the main class.
+		*/
 		public void stopExec() {
         		this.execute = false;
     		}
 
+		/**
+		* A maesurement is done every 100ms and the statistics are updated.
+		*/
 		public void run()
 		{
 			this.execute = true;
@@ -58,6 +77,10 @@ public class Monitor extends Thread
 			}
 		}
 
+		/**
+		* Updating the statistics (shared /virtual/ resident memory and CPU).
+		* New measurement is appended to appropriate list.
+		*/
 		public void updateStats(){
 
 			ProcMem procMem;
@@ -84,7 +107,11 @@ public class Monitor extends Thread
 			}
 		}
 
-
+		/**
+		* Helper fucntion to calculate the average memory
+		* @param list List of memory measurements to use.
+		* @return avgerage memory consumption.
+		*/
 		private double memAverage(ArrayList<Pair<java.sql.Timestamp, Long>> list){
 			if (list.size() == 0) return 0.0;
 			double ave = 0.0;
@@ -94,17 +121,25 @@ public class Monitor extends Thread
 			return ave;
 		}
 
+		/**
+		* Function to calulate the virtual memory used in average.
+		*/
 		public double memVirtAverage(){
 			return memAverage(this.memVirtList);
 		}
+
+		/**
+		* Function to calulate the shared memory used in average.
+		*/
 		public double memShareAverage(){
 			return memAverage(this.memShareList);
+
+		/**
+		* Function to calulate the resident memory used in average.
+		*/
 		}
 		public double memResAverage(){
 			return memAverage(this.memResList);
-		}
-		public double cpuTotalAverage(){
-			return memAverage(this.cpuTotalList);
 		}
 
 	}
