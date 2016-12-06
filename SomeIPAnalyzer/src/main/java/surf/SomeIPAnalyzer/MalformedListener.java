@@ -54,7 +54,7 @@ import java.util.Arrays;
 					SomeIPPacket some = (SomeIPPacket) elem.getUnderlying();
 					int srcIP = some.getSrcIP();
 					int dstIP = some.getDstIP();
-					//sendIDMEF(this.message, srcIP, dstIP);
+					sendIDMEF(this.message, srcIP, dstIP);
 
 				}
 

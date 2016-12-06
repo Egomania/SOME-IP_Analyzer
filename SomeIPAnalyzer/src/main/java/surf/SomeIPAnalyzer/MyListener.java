@@ -26,8 +26,6 @@ import com.espertech.esper.client.UpdateListener;
 		/** Number of events triggered. */
 		public int counter;
 
-		Runtime runtime = Runtime.getRuntime();
-
 		/**
 		* Standard Constructor.
 		*/
@@ -60,13 +58,12 @@ import com.espertech.esper.client.UpdateListener;
 				byte[] bytesDST = BigInteger.valueOf(dstIP).toByteArray();
 				InetAddress dstIPTEXT = InetAddress.getByAddress(bytesDST);
 				System.out.println("Alert Class: " + classification + " SRC IP: " + srcIPTEXT.getHostAddress() + " DST IP: " + dstIPTEXT.getHostAddress());
-				
+				//ToDo eliminate hardcoded url and port
 				URL url = new URL("http://127.0.0.1:7873/alert");
 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 				connection.setDoOutput(true);
 				connection.setRequestMethod("PUT");
 				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        		//connection.setRequestProperty("Accept", "application/json");
         		OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
         		osw.write("data=<IDMEF-Message><Alert messageid=\""+String.valueOf(this.counter)+"\"><CreateTime>2000-03-09T10:03:04.93464Z</CreateTime><Analyzer model=\"SOMEIP-Analyzer\"/><Target><Node><Address category=\"ipv4-addr\"><address>"+dstIPTEXT+"</address></Address></Node></Target><Source><Node><Address category=\"ipv4-addr\"><address>"+srcIPTEXT+"</address></Address></Node></Source><Classification text=\""+classification+"\"></Classification></Alert></IDMEF-Message>");
         		osw.flush();
