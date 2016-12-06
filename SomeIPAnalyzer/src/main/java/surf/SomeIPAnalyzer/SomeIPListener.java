@@ -42,7 +42,20 @@ import com.espertech.esper.client.UpdateListener;
 				}
 				System.out.println("Event Occurence: " + counter);
 				System.out.println("__________________________________ \n");
-			}	
+			}
+
+			for (EventBean elem: newData){
+				if (elem.getUnderlying() instanceof surf.SomeIPAnalyzer.SomeIPPacket){
+					SomeIPPacket some = (SomeIPPacket) elem.getUnderlying();
+					int srcIP = some.getSrcIP();
+					int dstIP = some.getDstIP();
+					sendIDMEF(this.message, srcIP, dstIP);
+				}
+				else{
+					
+				}
+			}
+	
 		}
 		
 	}

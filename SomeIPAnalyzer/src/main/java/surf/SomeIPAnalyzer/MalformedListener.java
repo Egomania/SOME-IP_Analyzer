@@ -3,6 +3,9 @@ package surf.SomeIPAnalyzer;
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
 
+import java.util.Arrays;
+
+
 /**
 * Specific Listener that gets a single SomeIP-Paket per call.
 * Prints the Paket in verbose mode.
@@ -45,6 +48,16 @@ import com.espertech.esper.client.UpdateListener;
 					System.out.println("__________________________________ \n");
 				}
 			}
+
+			for (EventBean elem: newData)
+				{
+					SomeIPPacket some = (SomeIPPacket) elem.getUnderlying();
+					int srcIP = some.getSrcIP();
+					int dstIP = some.getDstIP();
+					//sendIDMEF(this.message, srcIP, dstIP);
+
+				}
+
 		}
 		
 	}
